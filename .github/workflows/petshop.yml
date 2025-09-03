@@ -33,16 +33,13 @@ jobs:
     - name: Build with Maven
       run: mvn clean compile test --batch-mode
 
-    # SonarQube Scan
+    # SonarQube Scan using Maven plugin
     - name: Sonarqube Scan
-      uses: sonarsource/sonarqube-scan-action@v2
-      with:
-        args: >
-          - Dsonar.projectKey=Petshop
-          - Dsonar.projectName=Petshop
-      env:
-        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: mvn -B sonar:sonar \
+        -Dsonar.projectKey=Petshop \
+        -Dsonar.projectName=Petshop \
+        -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
+        -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
     # OWASP Dependency Check
     - name: OWASP Dependency Check
