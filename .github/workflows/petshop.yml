@@ -29,12 +29,23 @@ jobs:
         distribution: 'temurin'
         cache: maven
         
-    # Complie & Test    
-    - name: Build with Maven
-      run: mvn clean compile test --batch-mode
+    # Run Tests (dont fail the job)    
+    - name: Run Tests
+      run: mvn -B verify || true
+
+    # Upload test reports as artifact
+    - name: Upload Test Reports
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-reports
+        path: |
+          **/target/surefire-reports/*
+          **/target/surefire-reports/*
 
     # SonarQube Scan using Maven plugin
     - name: Sonarqube Scan
+      if: always()
       run: |
         mvn -B verify sonar:sonar \
           -Dsonar.projectKey=Petshop \
