@@ -33,6 +33,26 @@ jobs:
     - name: Build with Maven
       run: mvn clean compile test --batch-mode
 
+    # SonarQube Scan
+    - name: Sonarqube Scan
+      uses: sonarsource/sonarqube-scan-action@v2
+      with:
+        args: >
+          - Dsonar.projectKey=Petshop
+          - Dsonar.projectName=Petshop
+      env:
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+    # OWASP Dependency Check
+    - name: OWASP Dependency Check
+      uses: dependency-check/Dependency-Check_Action@main
+      with:
+        project: 'Petshop'
+        scan: '.'
+        format: 'ALL'
+        
+
    
     
 
