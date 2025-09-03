@@ -319,7 +319,10 @@
     <!-- Reproducible Builds -->
     <project.build.outputTimestamp>1670877034</project.build.outputTimestamp>
   </properties>
-
+       <properties>
+          <sonar.organization>shencko</sonar.organization>
+       </properties>
+       
   <profiles>
     <!-- Profiles for Application Server -->
     <profile>
