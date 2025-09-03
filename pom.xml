@@ -318,10 +318,6 @@
 
     <!-- Reproducible Builds -->
     <project.build.outputTimestamp>1670877034</project.build.outputTimestamp>
-  </properties>
-       <properties>
-          <sonar.organization>shencko</sonar.organization>
-       </properties>
        
   <profiles>
     <!-- Profiles for Application Server -->
@@ -345,6 +341,7 @@
     <profile>
       <id>tomee80</id>
       <properties>
+        <sonar.organization>shencko</sonar.organization>
         <tomee.major-version>8</tomee.major-version>
         <tomee.version>8.0.13</tomee.version>
         <cargo.maven.containerId>tomee${tomee.major-version}x</cargo.maven.containerId>
